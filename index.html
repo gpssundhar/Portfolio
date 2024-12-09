@@ -27,6 +27,15 @@
 
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "0q2ImFjIQPs8e5WpS",
+            });
+        })();
+    </script>
 
 </head>
 
@@ -809,7 +818,7 @@
                                             <textarea name="message" id="message" placeholder="Wrire your message here ..."></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                         <div class="input-group upload-attachment">
                                             <div>
                                                 <label for="upload-attachment">
@@ -820,7 +829,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-12">
                                         <div class="input-group submit-btn-wrap">
                                             <button class="theme-btn" name="submit" type="submit" id="submit-form">send message</button>
@@ -852,3 +861,35 @@
 </body>
 
 </html>
+<script>
+    function sendmail() {
+        let name = document.getElementById("full-name").value;
+        let email = document.getElementById("email").value;
+        let phoneno = document.getElementById("phone-number").value;
+        let message = document.getElementById("message").value;
+        if (
+            name != "" && email != ""
+        ) {
+            let params = {
+                from_name: document.getElementById("full-name").value,
+                from_email: document.getElementById("email").value,
+                from_phno: document.getElementById("phone-number").value,
+                message: document.getElementById("message").value
+            }
+
+            emailjs.send("service_tx4zm2n", "template_hq64iv9", params)
+                .then(function (response) {
+                    alert("Email sent successfully!");
+                }, function (error) {
+
+                    alert("Failed to send email.");
+                });
+        } else {
+            alert("Field is Required")
+        }
+
+
+    }
+
+
+</script>
